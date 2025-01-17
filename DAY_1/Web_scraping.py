@@ -51,9 +51,10 @@ header = scrap_table.find_all("th")
 
 
 # Convert the headers into a list
-header_list = []
-for header_data in header:
-    header_list.append(header_data.text.strip())
+# header_list = []
+# for header_data in header:
+#     header_list.append(header_data.text.strip())
+header_list = map(lambda header_data: header_data.text.strip(), header)
 
 # Remove unwanted headers from the list (keeping only the first 9 headers)
 header_list_data = []
@@ -83,7 +84,7 @@ for row in rows_data:
         individual_row_data.append(data.text.strip())
 
     all_rows_data.append(individual_row_data)
-
+    
 # ----------- Step 3 : Create a dataframe from content and headers ----------- #
 df = pd.DataFrame(all_rows_data, columns=header_list_data)
 
